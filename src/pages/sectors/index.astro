@@ -6,8 +6,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro'
 const sectors = await getCollection('sectors')
 ---
 <BaseLayout pageTitle="Setores">
-	Setores
-
+	<h2>Setores</h2>
 	<ul>
 		{sectors.map((sector: any) => (
 			<li>
@@ -15,4 +14,6 @@ const sectors = await getCollection('sectors')
 			</li>
 		))}
 	</ul>
+
+	<a href="https://github.com/mukah/rachada/new/main/data/sectors/setor/?filename=sector.json&value=CONTEUDO_AQUI">Adicionar novo</a>
 </BaseLayout>

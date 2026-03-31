@@ -4,7 +4,7 @@ const pageRoutes = Object.freeze({
     sector: (sectorSlug) => `/sector/${sectorSlug}`,
     route: (routeSlug) => `/route/${routeSlug}`,
     videos: () => '/videos',
-    youtubeVideo: (videoId) => `/video/youtube/${videoId}`
+    video: (videoId) => `/video/${videoId}`
 })
 
 export function getPageRoute(name, ...args) {
