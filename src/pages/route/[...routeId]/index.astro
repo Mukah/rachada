@@ -1,0 +1,45 @@
+---
+import { getCollection, getEntry } from 'astro:content'
+import BaseLayout from '../../../../src/layouts/BaseLayout.astro'
+import { getPageRoute } from '../../../utils/page-routes'
+import { getEntries } from 'astro:content'
+
+export async function getStaticPaths() {
+	const routes = await getCollection('routes')
+
+	return routes.map((route: any) => ({
+		params: {
+			routeId: route.id,
+		}
+	}))
+}
+
+const {
+    routeId
+} = Astro.params as {
+    routeId: string
+}
+
+const route = await getEntry('routes', routeId)
+const videos = await getEntries(route?.data.videos || [])
+---
+<BaseLayout pageTitle="Rota">
+	{route && (
+		<div>
+			<h1>{route.data.name}</h1>
+			<p>Detalhes da rota {route.data.name}.</p>
+			{videos.length > 0 && (
+				<div>
+					<h3>Vídeos </h3>
+					<ul>
+						{videos.map((video: any) => (
+							<li>
+								<a href={getPageRoute('video', video.id)}>{video.data.name}</a>
+							</li>
+						))}
+					</ul>
+				</div>
+			)}
+		</div>
+	)}
+</BaseLayout>

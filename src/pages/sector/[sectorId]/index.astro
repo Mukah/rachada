@@ -7,18 +7,19 @@ export async function getStaticPaths() {
 	const sectors = await getCollection('sectors')
 	
 	return sectors.map((sector: any) => ({
-		params: { sectorSlug: sector.data.slug }
+		params: { sectorId: sector.id }
 	}))
 }
 
 const {
-	sectorSlug
+	sectorId
 } = Astro.params as {
-	sectorSlug: string
+	sectorId: string
 }
 
-const sector = await getEntry('sectors', sectorSlug)
-const routes = await getCollection('routes', (entry) => entry.data.sectorSlug === sectorSlug)
+const sector = await getEntry('sectors', sectorId)
+const routes = await getCollection('routes', (entry) => entry.id.startsWith(sectorId + '/'))
+console.log(routes)
 ---
 <BaseLayout pageTitle="Setores">
 	{sector && (
@@ -30,7 +31,7 @@ const routes = await getCollection('routes', (entry) => entry.data.sectorSlug ==
 			<ul>
 				{routes.map((route: any) => (
 					<li>
-						<a href={getPageRoute('route', sector.data.slug, route.data.slug)}>{route.data.name}</a>
+						<a href={getPageRoute('route', route.id)}>{route.data.name}</a>
 					</li>
 				))}
 			</ul>

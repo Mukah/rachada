@@ -1,0 +1,45 @@
+{
+    "name": "Flash no Rolling Stones v8 - Pedra Rachada",
+    "slug": "f8d9s0f1h23klhlk",
+    "description": "Vídeo do flash da via Rolling Stones (v8) no setor",
+    "videoId": "f8d9s0f1h23klhlk",
+    "url": "https://www.youtube.com/watch?v=f8d9s0f1h23klhlk",
+    "publishedAt": "2024-06-15T12:00:00Z",
+    "thumbnails": {
+        "default": {
+          "url": "https://i.ytimg.com/vi/49EYF0LhdYA/default.jpg",
+          "width": 120,
+          "height": 90
+        },
+        "medium": {
+          "url": "https://i.ytimg.com/vi/49EYF0LhdYA/mqdefault.jpg",
+          "width": 320,
+          "height": 180
+        },
+        "high": {
+          "url": "https://i.ytimg.com/vi/49EYF0LhdYA/hqdefault.jpg",
+          "width": 480,
+          "height": 360
+        },
+        "standard": {
+          "url": "https://i.ytimg.com/vi/49EYF0LhdYA/sddefault.jpg",
+          "width": 640,
+          "height": 480
+        },
+        "maxres": {
+          "url": "https://i.ytimg.com/vi/49EYF0LhdYA/maxresdefault.jpg",
+          "width": 1280,
+          "height": 720
+        }
+    },
+    "channel": {
+        "id": "UCX9w5nqj8l3Zt1kK7v6z2g",
+        "name": "Rachada",
+        "url": "https://www.youtube.com/@rachada",
+        "icon": {
+            "url": "https://yt3.ggpht.com/ytc/AKedOLQ9n8sXo5l7m1z2g5j8k6v1n9q5j8k6v1n9q=s88-c-k-c0x00ffffff-no-rj",
+            "width": 88,
+            "height": 88
+        }
+    }
+}

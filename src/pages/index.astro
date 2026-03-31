@@ -1,6 +1,21 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import { getPageRoute } from '../utils/page-routes'
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { getCollection } from 'astro:content'
+
+const sectors = await getCollection('sectors')
+console.log(sectors)
 ---
+
 <BaseLayout pageTitle="Rachada">
-	Rachada
+	<h2>
+		<a href={getPageRoute('sectors')}>Setores</a>
+	</h2>
+	<ul>
+		{sectors.map((sector: any) => (
+			<li>
+				<a href={getPageRoute('sector', sector.id)}>{sector.data.name}</a>
+			</li>
+		))}
+	</ul>
 </BaseLayout>

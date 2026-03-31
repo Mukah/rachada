@@ -1,7 +1,6 @@
 {
     "name": "Rolling Stones",
     "slug": "rolling-stones",
-    "sectorSlug": "rolling-stones",
     "suggestedGrade": {
         "vScale": "v4",
         "fontScale": "5b"
@@ -9,5 +8,8 @@
     "communityGrade": {
         "vScale": "v4",
         "fontScale": "5b"
-    }
+    },
+    "videos": [
+        
+    ]
 }

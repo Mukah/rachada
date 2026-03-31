@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content'
-import { getPageRoute } from '../utils/page-routes'
-import BaseLayout from '../layouts/BaseLayout.astro'
+import { getPageRoute } from '../../utils/page-routes'
+import BaseLayout from '../../layouts/BaseLayout.astro'
 
 const sectors = await getCollection('sectors')
 ---
@@ -11,7 +11,7 @@ const sectors = await getCollection('sectors')
 	<ul>
 		{sectors.map((sector: any) => (
 			<li>
-				<a href={getPageRoute('sector', sector.data.slug)}>{sector.data.name}</a>
+				<a href={getPageRoute('sector', sector.id)}>{sector.data.name}</a>
 			</li>
 		))}
 	</ul>
