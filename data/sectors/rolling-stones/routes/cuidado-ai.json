@@ -1,0 +1,13 @@
+{
+    "name": "Cuidado aí",
+    "slug": "cuidado-ai",
+    "sectorSlug": "rolling-stones",
+    "suggestedGrade": {
+        "vScale": "v3",
+        "fontScale": "5a"
+    },
+    "communityGrade": {
+        "vScale": "v3",
+        "fontScale": "5a"
+    }
+}

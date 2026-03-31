@@ -1,6 +1,15 @@
 ---
+import { getEntry, getCollection } from 'astro:content'
+import { getPageRoute } from '../../../utils/page-routes'
 import BaseLayout from '../../../layouts/BaseLayout.astro'
-import sectors from '../../../../data/sectors.json'
+
+export async function getStaticPaths() {
+	const sectors = await getCollection('sectors')
+	
+	return sectors.map((sector: any) => ({
+		params: { sectorSlug: sector.data.slug }
+	}))
+}
 
 const {
 	sectorSlug
@@ -8,23 +17,20 @@ const {
 	sectorSlug: string
 }
 
-export function getStaticPaths() {
-	return sectors.map((sector: any) => ({
-		params: { sectorSlug: sector.slug }
-	}));
-}
-
-const sector = sectors.find((s: any) => s.slug === sectorSlug)
+const sector = await getEntry('sectors', sectorSlug)
+const routes = await getCollection('routes', (entry) => entry.data.sectorSlug === sectorSlug)
 ---
 <BaseLayout pageTitle="Setores">
 	{sector && (
 		<div>
-			<h1>{sector.name}</h1>
-			<p>{sector.description}</p>
+			<h1>{sector.data.name}</h1>
+			<p>{sector.data.description}</p>
+
+			<h2>Rotas</h2>
 			<ul>
-				{sector.routes.map((boulder: any) => (
+				{routes.map((route: any) => (
 					<li>
-						<a href={`/sector/${sector.slug}/route/${boulder.slug}`}>{boulder.name}</a>
+						<a href={getPageRoute('route', sector.data.slug, route.data.slug)}>{route.data.name}</a>
 					</li>
 				))}
 			</ul>

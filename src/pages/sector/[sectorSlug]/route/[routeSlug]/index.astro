@@ -1,31 +1,35 @@
 ---
+import { getCollection } from 'astro:content'
 import BaseLayout from '../../../../../../src/layouts/BaseLayout.astro'
-import sectors from '../../../../../../data/sectors.json'
+import { getEntry } from 'astro:content'
 
-export function getStaticPaths() {
-	return sectors.flatMap((sector: any) =>
-		sector.routes.map((route: any) => ({
-			params: { sectorSlug: sector.slug, routeSlug: route.slug }
-		}))
-	);
+export async function getStaticPaths() {
+	const routes = await getCollection('routes')
+
+	return routes.map((route: any) => ({
+		params: { 
+			sectorSlug: route.data.sectorSlug,
+			routeSlug: route.data.slug
+		}
+	}))
 }
 
 const {
     sectorSlug,
     routeSlug
 } = Astro.params as {
-    sectorSlug: string;
+    sectorSlug: string,
     routeSlug: string
 }
 
-const sector = sectors.find((s: any) => s.slug === sectorSlug)
-const route = sector?.routes.find((r: any) => r.slug === routeSlug)
+const sector = await getEntry('sectors', sectorSlug)
+const route = await getEntry('routes', routeSlug)
 ---
 <BaseLayout pageTitle="Rota">
 	{route && (
 		<div>
-			<h1>{route.name}</h1>
-			<p>Detalhes da rota {route.name} no setor {sector?.name}.</p>
+			<h1>{route.data.name}</h1>
+			<p>Detalhes da rota {route.data.name} no setor {sector?.data.name}.</p>
 		</div>
 	)}
 
