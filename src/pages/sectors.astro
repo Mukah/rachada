@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import sectors from '../../data/sectors.json'
+---
+<BaseLayout pageTitle="Setores">
+	Setores
+
+	<ul>
+		{sectors.map(sector => (
+			<li>
+				<a href={`/sector/${sector.slug}`}>{sector.name}</a>
+			</li>
+		))}
+	</ul>
+</BaseLayout>

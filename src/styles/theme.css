@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Schoolbell&display=swap');
+
+/* color palette from <https://github.com/vuejs/theme> */
+:root {
+}
+
+/* semantic color variables for this project */
+:root {
+  --color-text: #333;
+  --color-background: #FFF;
+}
+
+@media (prefers-color-scheme: dark) {
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: var(--color-text);
+  background: var(--color-background);
+  font-family: 'Schoolbell', cursive, sans-serif;
+  font-size: 16px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

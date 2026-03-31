@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro'
+import sectors from '../../../../data/sectors.json'
+
+const {
+	sectorSlug
+} = Astro.params as {
+	sectorSlug: string
+}
+
+export function getStaticPaths() {
+	return sectors.map((sector: any) => ({
+		params: { sectorSlug: sector.slug }
+	}));
+}
+
+const sector = sectors.find((s: any) => s.slug === sectorSlug)
+---
+<BaseLayout pageTitle="Setores">
+	{sector && (
+		<div>
+			<h1>{sector.name}</h1>
+			<p>{sector.description}</p>
+			<ul>
+				{sector.routes.map((boulder: any) => (
+					<li>
+						<a href={`/sector/${sector.slug}/route/${boulder.slug}`}>{boulder.name}</a>
+					</li>
+				))}
+			</ul>
+		</div>
+	)}
+</BaseLayout>
