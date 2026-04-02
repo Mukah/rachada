@@ -2,12 +2,18 @@
 
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
+    --color-neutral-100: #FFFFFF;
+    --color-neutral-600: #444444;
+    --color-neutral-800: #37353E;
+    --color-primary: #715A5A;
+    --color-secondary: #D3DAD9;
 }
 
 /* semantic color variables for this project */
 :root {
-  --color-text: #333;
-  --color-background: #FFF;
+    --color-text: var(--color-neutral-800);
+    --color-background: var(--color-neutral-100);
+    --color-border: var(--color-neutral-600);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -34,4 +40,36 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+input {
+    font-family: 'Schoolbell', cursive, sans-serif;
+    border: solid 1px var(--color-border);
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 16px;
+    outline: none;
+    background-color: var(--color-background);
+    color: var(--color-text);
+}
+
+button {
+    font-family: 'Schoolbell', cursive, sans-serif;
+    cursor: pointer;
+    font-size: 16px;
 }

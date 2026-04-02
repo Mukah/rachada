@@ -1,10 +1,10 @@
 ---
+import { getPageRoute } from '../utils/page-routes'
 import Navigation from './Navigation.astro'
 ---
 
 <header class="header">
-    <span class="logo">Rachada</span>
-    <Navigation />
+    <a class="logo" href={getPageRoute('home')}>Rachada</a>
 </header>
 
 <style>
@@ -12,9 +12,10 @@ import Navigation from './Navigation.astro'
     display: flex;
     flex-direction: row;
     align-items: center;
+    height: 64px;
 
     .logo {
-        font-size: 24px;
+        font-size: 32px;
     }
   }
 </style>

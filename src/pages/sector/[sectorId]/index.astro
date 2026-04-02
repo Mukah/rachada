@@ -19,7 +19,6 @@ const {
 
 const sector = await getEntry('sectors', sectorId)
 const routes = await getCollection('routes', (entry) => entry.id.startsWith(sectorId + '/'))
-console.log(routes)
 ---
 <BaseLayout pageTitle="Setores">
 	{sector && (

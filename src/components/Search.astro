@@ -1,21 +1,156 @@
 <section class="search">
-    <form name="searchForm" method="POST">
-        <input type="text" name="query" placeholder="Pesquisar..." />
-        <button type="submit">Buscar</button>
+    <form
+        class="form"
+        method="POST"
+    >
+        <input
+            class="query-input"
+            type="search"
+            name="query"
+            placeholder="O que você procura?"
+        />
+        <button
+            class="reset-button"
+            type="reset"
+        >
+            X
+        </button>
     </form>
+    <section class="search-results">
+        <div class="container">
+            
+        </div>
+    </section>
 </section>
 
 <script>
     import { actions } from 'astro:actions'
 
-    const searchForm = document.querySelector('form[name="searchForm"]') as HTMLFormElement
+    const searchElement = document.querySelector('.search') as HTMLElement
+    const searchResultsContainerElement = searchElement.querySelector('.search-results .container') as HTMLElement
+    const searchForm = searchElement.querySelector('.form') as HTMLFormElement
 
-    searchForm.addEventListener('submit', async (event) => {
+    function handleSearchFormSubmit(event: Event) {
         event.preventDefault()
+
+        displayOverlay()
+
         const formData = new FormData(searchForm)
         const query = formData.get('query') as string
 
-        const results = await actions.server.search({ query })
-        console.log(results)
-    })
+        actions.search({ query })
+            .then(handleSearchSuccess)
+            .catch(handleSearchError)
+    }
+
+    function handleSearchFormReset() {
+        hideOverlay()
+    }
+
+    function handleDocumentKeyDown(event: KeyboardEvent) {
+        if (event.key === 'Escape' && isOverlayActive()) {
+            hideOverlay()
+        }
+    }
+
+    function handleSearchSuccess(results: any) {
+        if (results.error) {
+            console.error('Erro na busca:', results.error)
+            return
+        }
+
+        results.data.forEach((result: any) => {
+            searchResultsContainerElement.appendChild(createResultElement(result))
+        })
+    }
+
+    function handleSearchError(error: any) {
+        console.error('Erro na busca:', error)
+    }
+
+    function createResultElement(result: any) {
+        const resultElement = document.createElement('div')
+        resultElement.textContent = result.data.name
+        return resultElement
+    }
+
+    function displayOverlay() {
+        searchElement.classList.add('active')
+    }
+
+    function hideOverlay() {
+        searchElement.classList.remove('active')
+    }
+
+    function isOverlayActive() {
+        return searchElement.classList.contains('active')
+    }
+
+    searchForm.addEventListener('submit', handleSearchFormSubmit)
+    searchForm.addEventListener('reset', handleSearchFormReset)
+    document.addEventListener('keydown', handleDocumentKeyDown)
 </script>
+
+<style>
+    .search {
+        display: block;
+
+        .form {
+            display: block;
+            position: relative;
+            width: 100%;
+            height: auto;
+                            z-index: 99999;
+            transition: transform 0.3s;
+
+            .query-input {
+                width: 100%;
+                font-size: 16px;
+                height: 40px;
+                padding-right: 40px;
+            }
+
+            .reset-button {
+                display: none;
+                width: 40px;
+                height: 40px;
+                position: absolute;
+                right: 0;
+                top: 0;
+                border: none;
+                background: none;
+                cursor: pointer;
+            }
+        }
+
+        .search-results {
+            display: none;
+            background-color: var(--color-background);
+            position: fixed;
+            inset: 0;
+            z-index: 99998;
+            height: 0;
+            overflow: hidden;
+            transition: height 0.3s, opacity 0.3s, padding 0.3s;
+            opacity: 0;
+            
+        }
+
+        &.active {
+            .form {
+                transform: translateY(-40px);
+
+                .reset-button {
+                    display: block;
+                }
+            }
+    
+            .search-results {
+                display: block;
+                height: 100%;
+                opacity: 1;
+                padding: 100px 0 0;
+            }
+        }
+    }
+</style>
