@@ -1,8 +1,9 @@
 ---
-import '../styles/theme.css';
-import Header from '../components/Header.astro';
+import '../styles/theme.css'
+import Header from '../components/Header.astro'
+import Search from '../components/Search.astro'
 
-const { pageTitle } = Astro.props;
+const { pageTitle } = Astro.props
 ---
 <html lang="en">
   <head>
@@ -13,13 +14,18 @@ const { pageTitle } = Astro.props;
     <title>{pageTitle}</title>
   </head>
   <body>
-    <Header/>
-    
-    <h1>{pageTitle}</h1>
-    <slot />
+    <div class="container">
+      <Header/>
+      <Search/>
+      <slot />
+    </div>
   </body>
 </html>
 
 <style>
-
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 16px;
+    }
 </style>

@@ -1,0 +1,21 @@
+<section class="search">
+    <form name="searchForm" method="POST">
+        <input type="text" name="query" placeholder="Pesquisar..." />
+        <button type="submit">Buscar</button>
+    </form>
+</section>
+
+<script>
+    import { actions } from 'astro:actions'
+
+    const searchForm = document.querySelector('form[name="searchForm"]') as HTMLFormElement
+
+    searchForm.addEventListener('submit', async (event) => {
+        event.preventDefault()
+        const formData = new FormData(searchForm)
+        const query = formData.get('query') as string
+
+        const results = await actions.server.search({ query })
+        console.log(results)
+    })
+</script>
